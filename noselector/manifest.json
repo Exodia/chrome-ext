@@ -1,0 +1,23 @@
+{
+    "name": "NoSelector",
+    "version": "1.0",
+    "manifest_version": 1,
+    "description": "NoSelector",
+    "content_scripts":[
+        {
+            "matches": ["http://*/*", "https://*/*","file://*/*"],
+            "js": ["jquery.js", "detect.js", "main.js"]
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "tabs"
+    ],
+    "browser_action": {
+        "default_icon": "images/stop.png", // optional
+        "default_title": "开始捕获"     // optional; shown in tooltip
+    },
+    "web_accessible_resources": ["images/start.png", "images/stop.png"]
+}
