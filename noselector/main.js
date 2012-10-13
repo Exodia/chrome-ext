@@ -3,9 +3,8 @@ void function($){
 
     var URL = 'http://127.0.0.1:8189';
     var $body = $('body');
-    var CTRL = 17;
     var started = false;
-    var inited = false;
+    var F2 = 113;
     var rangeModel = false;
 
     function sendMsg(data){
@@ -19,7 +18,8 @@ void function($){
     }
 
     function keyHandler(ev) {
-        if(ev.ctrlKey) {
+
+        if(ev.which == F2) {
             if(rangeModel = !rangeModel) {
                 $body.xxRangeSelect().xxOverSelect('disable');
             } else {
@@ -51,8 +51,8 @@ void function($){
                             pathes.push(XX.path(elems[i]));
                         }
                         sendMsg(pathes.join(';'));
-                        $body.xxRangeSelect();
                     }
+                    $body.xxRangeSelect();
                 });
         } else {
             started = false;
