@@ -169,6 +169,8 @@ void function($){
 					return;
 				}
 
+                console.log('enable')
+
 				if(!$left) {
 					$left = $("<div>").css({
 						position : 'absolute',
@@ -196,7 +198,8 @@ void function($){
 				$elem.off({
 					mouseover : overFn,
 					click : clickFn
-				}).css('cursor', this.$oldCursor);
+				}).css('cursor', $elem.$oldCursor);
+
 				$left.remove(), $right.remove(), $top.remove(), $bottom.remove();
 				enabled = false;
 			},
