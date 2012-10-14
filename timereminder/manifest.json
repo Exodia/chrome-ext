@@ -1,0 +1,15 @@
+{
+	"name": "时间提醒",
+	"version": "1.0",
+	"manifest_version": 2,
+	"description": "简易，丑陋，无技术含量的时间提醒工具，主要是提醒自己每个小时要起来活动一下",
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "desktop-notification.html"
+	},
+	"permissions": ["notifications"],
+	"background": {
+		"scripts": ["desktopNotify.js", "background.js"]
+	},
+	"web_accessible_resources": ["icon.png"]
+}
