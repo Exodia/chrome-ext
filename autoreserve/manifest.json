@@ -1,0 +1,16 @@
+{
+	"name": "autoreserve",
+	"version": "1.0",
+	"manifest_version": 2,
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "./popup/popup.html"
+	},
+	"content_scripts":[
+        {
+            "matches": ["https://reserve.apple.com/CN/zh_CN/reserve/iPhone"],
+            "js": ["jquery.js", "main.js"]
+        }
+    ]
+	"web_accessible_resources": ["icon.png"]
+}
