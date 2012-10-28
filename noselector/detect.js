@@ -238,11 +238,21 @@ void function() {
 	 * 参数root: 路径开始的节点,默认为body,最高也为body
 	 * */
 	XX.path = function(elem, root) {
-		var ret = [], body = document.body, root = root || body;
+		var ret = [], body = document.body, root = root || body,
 		while (elem !== root && elem !== body) {
 			ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
 			elem = elem.parentNode;
 		}
+		//嵌套iframe的情况
+		var parentWin = window.parent,
+			curWin = window;
+		while(parentWin !== window.top) {
+			ret.unshift(parentWin.XX.path(curWin.frameElement));
+			curWin = parentWin;
+			parentWin = parentWin.parent;		
+		}
+			
+		
 		console.log(ret.join('>'));
 		return ret.join('>')
 	};
