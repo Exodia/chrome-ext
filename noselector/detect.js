@@ -178,7 +178,7 @@ void function($){
 						left : '-5000px',
 						width : '0',
 						height : '0',
-						border : '2px solid red'
+						border : self.frameElement? '2px solid green' : '2px solid red'
 					}).appendTo('body');
 					$bottom = ( $top = ( $right = $left.clone().appendTo('body')).clone().appendTo('body')).clone().appendTo('body');
 				}
@@ -238,7 +238,7 @@ void function() {
 	 * 参数root: 路径开始的节点,默认为body,最高也为body
 	 * */
 	XX.path = function(elem, root) {
-		var ret = [], body = document.body, root = root || body,
+		var ret = [], body = document.body, root = root || body;
 		while (elem !== root && elem !== body) {
 			ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
 			elem = elem.parentNode;

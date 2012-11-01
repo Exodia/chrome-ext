@@ -1,12 +1,13 @@
 {
     "name": "NoSelector",
     "version": "1.0",
-    "manifest_version": 1,
+    "manifest_version": 2,
     "description": "NoSelector",
     "content_scripts":[
         {
             "matches": ["http://*/*", "https://*/*","file://*/*"],
-            "js": ["jquery.js", "detect.js", "main.js"]
+            "js": ["jquery.js", "detect.js", "main.js"],
+            "all_frames": true
         }
     ],
     "background": {
