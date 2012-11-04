@@ -6,8 +6,8 @@
     "content_scripts":[
         {
             "matches": ["http://*/*", "https://*/*","file://*/*"],
-            "js": ["jquery.js", "detect.js", "main.js"],
-            "all_frames": true
+            "js": ["jquery.js", "detect.js", "main.js"]
+      //      "all_frames": true
         }
     ],
     "background": {

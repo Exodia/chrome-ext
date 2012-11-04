@@ -1,6 +1,4 @@
-void function($){
-    chrome.extension.sendMessage('loaded');
-
+void function($){ 
     var URL = 'http://127.0.0.1:8189';
     var $body = $('body');
     var started = false;
@@ -28,6 +26,11 @@ void function($){
 
         }
     }
+    
+    void function() { 	
+    	chrome.extension.sendMessage('loaded');	
+    }();
+
 
     chrome.extension.onMessage.addListener(function(command){
         if(command == 'start') {
@@ -39,12 +42,14 @@ void function($){
             $body.on('keydown', keyHandler);
 
             $body.xxOverSelect().on('xxselect:select', function(ev, el){
-                if(confirm("是否发送消息？")){
+                if(confirm("确定记录元素路径？")){
+                	$body.xxOverSelect('disable');
                     sendMsg(XX.path(el));
+                    $body.xxOverSelect();
                 }
             }).on('xxRangeSelect:selectend', function(ev, point, $mask){
                     $body.xxRangeSelect('disable');
-                    if(confirm("是否发送消息？")){
+                    if(confirm("确定记录元素路径？")){
                         var elems = XX.getElementsByRange(point.x1, point.y1, point.x2, point.y2, this);
                         var pathes = [];
                         for(var i = 0, len = elems.length; i < len; ++i) {
@@ -53,7 +58,7 @@ void function($){
                         sendMsg(pathes.join(';'));
                     }
                     $body.xxRangeSelect();
-                });
+            });
         } else {
             started = false;
             $body.xxRangeSelect('disable').xxOverSelect('disable').off('keydown xxselect:select xxRangeSelect:selectend');

@@ -236,9 +236,11 @@ void function() {
 	/*获取元素在DOM树中的路径，以“标签名$索引位置>标签名$索引位置“的字符串返回
 	 *参数elem:计算路径的元素
 	 * 参数root: 路径开始的节点,默认为body,最高也为body
+	 * 参数filter: 需要排除路径计算的元素
 	 * */
-	XX.path = function(elem, root) {
-		var ret = [], body = document.body, root = root || body;
+	XX.path = function(elem, root, filter) {
+		var ret = [], body = document.body;
+		root = root || body;
 		while (elem !== root && elem !== body) {
 			ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
 			elem = elem.parentNode;
