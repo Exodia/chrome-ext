@@ -6,7 +6,11 @@ void function($){
     var rangeModel = false;
 
     function sendMsg(data){
-        $.post(URL, data, function(data){
+    	var params = {
+    		url:location.href,
+    		data: data
+    	};
+        $.post(URL, params, function(data){
             if(data && data.status == 'success'){
                 console && console.log('success');
             } else {
