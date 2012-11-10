@@ -1,24 +1,29 @@
 {
-    "name": "NoSelector",
-    "version": "1.0",
-    "manifest_version": 2,
-    "description": "NoSelector",
+    "name":"NoSelector",
+    "version":"1.0",
+    "manifest_version":2,
+    "description":"NoSelector",
     "content_scripts":[
         {
-            "matches": ["http://*/*", "https://*/*","file://*/*"],
-            "js": ["jquery.js", "detect.js", "main.js"]
-      //      "all_frames": true
+            "matches":["http://*/*", "https://*/*", "file://*/*"],
+            "js":["./content_scripts/all_frames/init.js", "./content_scripts/all_frames/jquery.js",
+                "./content_scripts/all_frames/detect.js", "./content_scripts/all_frames/main.js"],
+            "all_frames":true
+        },
+        {
+            "matches":["http://*/*", "https://*/*", "file://*/*"],
+            "js":["./content_scripts/top.js"]
         }
     ],
-    "background": {
-        "scripts": ["background.js"]
+    "background":{
+        "scripts":["background.js"]
     },
-    "permissions": [
+    "permissions":[
         "tabs"
     ],
-    "browser_action": {
-        "default_icon": "images/stop.png", // optional
-        "default_title": "开始捕获"     // optional; shown in tooltip
+    "browser_action":{
+        "default_icon":"images/stop.png",
+        "default_title":"开始捕获"
     },
-    "web_accessible_resources": ["images/start.png", "images/stop.png"]
+    "web_accessible_resources":["images/start.png", "images/stop.png"]
 }
