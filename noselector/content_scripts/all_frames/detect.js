@@ -169,8 +169,7 @@ void function($){
 					return;
 				}
 
-                console.log('enable')
-
+               
 				if(!$left) {
 					$left = $("<div>").css({
 						position : 'absolute',
@@ -178,7 +177,7 @@ void function($){
 						left : '-5000px',
 						width : '0',
 						height : '0',
-						border : self.frameElement? '2px solid green' : '2px solid red'
+						border : window.top? '2px solid red' : '2px solid green'
 					}).appendTo('body');
 					$bottom = ( $top = ( $right = $left.clone().appendTo('body')).clone().appendTo('body')).clone().appendTo('body');
 				}

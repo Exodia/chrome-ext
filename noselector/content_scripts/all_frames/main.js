@@ -6,11 +6,11 @@ void function($){
     var rangeModel = false;
 
     function sendMsg(data){
-    	var params = {
-    		url:location.href,
-    		data: data
-    	};
-        $.post(URL, params, function(data){
+    	if(!window.top) {
+    		data = XX.currentFramePath + '>' + data;
+    	}
+    	console.log(data);
+        $.post(URL, data, function(data){
             if(data && data.status == 'success'){
                 console && console.log('success');
             } else {
@@ -41,7 +41,8 @@ void function($){
                 return;
             }
             started = true;
-
+			XX.init();
+			XX.start();
             $body.on('keydown', keyHandler);
 
             $body.xxOverSelect().on('xxselect:select', function(ev, el){
@@ -64,7 +65,9 @@ void function($){
             });
         } else {
             started = false;
-            $body.xxRangeSelect('disable').xxOverSelect('disable').off('keydown xxselect:select xxRangeSelect:selectend');
+            XX.stop();
+            $body.xxRangeSelect('disable').xxOverSelect('disable')
+            	 .off('keydown xxselect:select xxRangeSelect:selectend');
         }
     });
 }(jQuery);
