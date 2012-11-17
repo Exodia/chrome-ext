@@ -1,114 +1,4 @@
-var Data = {
-	'35042419880107003x' : {
-		fields : {
-			"firstname" : '欣欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-	},
-	'35042419880107004x' : {
-		fields : {
-			"firstname" : '欣6欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-	},
-	'35042419880107005x' : {
-		fields : {
-			"firstname" : '欣5欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
 
-	},
-	'35042419880107006x' : {
-		fields : {
-			"firstname" : '欣4欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-
-	},
-	'35042419880107007x' : {
-		fields : {
-			"firstname" : '欣2欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-
-	},
-	'35042419880107008x' : {
-		fields : {			
-			"firstname" : '欣1欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-
-	},
-	'35042419880107009x' : {
-		fields : {			
-			"firstname" : '欣3欣',
-			"lastname" : '邓',
-			"email" : 'd_xinxin@163.com',
-			"govid" : '35042419880107003x'
-		},
-		selects:{
-			"store": 6,
-			"quantity" : 5
-		},
-		radios:{
-			"addButtonMD198CH~AC" : true
-		}
-	},
-}
 
 var SubmitButton = 'submitButton';
 
@@ -119,9 +9,11 @@ function fireChange(el) {
 }
 
 $(function() {
-	chrome.extension.onMessage.addListener(function(msg) {
-		var id = msg.id, item = Data[id],
-			fields = item.fields, selects = item.selects, radios = item.radios;
+	chrome.extension.onMessage.addListener(function(msg) {	
+		var data = msg.data,
+			fields = data.fields, 
+		//	selects = item.selects, 
+			radios = data.radios;
 		for (var k in fields) {
 			$('#' + k).val(fields[k]);
 		}
@@ -130,9 +22,9 @@ $(function() {
 			$(document.getElementById(k)).prop('disabled', false).trigger('click');
 		}
 		
-		for(k in selects) {		
-			fireChange(($('#' + k).prop('selectedIndex', selects[k]))[0]);
-		}
-		$($("#quantity")[0].options[2]).trigger('click')
+		// for(k in selects) {		
+			// fireChange(($('#' + k).prop('selectedIndex', selects[k]))[0]);
+		// }
+	//	$($("#quantity")[0].options[2]).trigger('click')
 	})
 });

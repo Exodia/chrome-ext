@@ -9,7 +9,7 @@
 	"permissions":["tabs"],
 	"content_scripts":[
         {
-            "matches": ["https://reserve.apple.com/CN/zh_CN/reserve/iPhone"],
+            "matches": ["http://*/*"],
             "js": ["jquery.js", "main.js"]
         }
     ],
