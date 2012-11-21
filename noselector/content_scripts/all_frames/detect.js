@@ -243,19 +243,9 @@ void function() {
 			ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
 			elem = elem.parentNode;
 		}
-		//嵌套iframe的情况
-		var parentWin = window.parent,
-			curWin = window;
-		while(parentWin !== window.top) {
-			ret.unshift(parentWin.XX.path(curWin.frameElement));
-			curWin = parentWin;
-			parentWin = parentWin.parent;		
-		}
 
-		console.log(ret.join('>'));
 		return ret.join('>')
 	};
-	
 	
 	/*获取元素在DOM树中相同标签节点的位置索引*/
 	XX.indexTag = function(elem, deep) {
@@ -283,37 +273,11 @@ void function() {
 			}
 		}
 	};
-	
-	
+
 	/*获取元素的非文本节点集合*/
-	XX.children = function(elem) {
-		var ret;
-		if (elem.children) {
-			return XX.nodeListToArray(elem.children);
-		}
-
-		ret = [];
-		for (var i = 0, nodes = elem.childNodes, len = nodes.length; i < len; ++i) {
-			if (nodes[i].nodeType === 1) {
-				ret.push(nodes[i]);
-			}
-		}
-
-		return ret;
-	};
-	
-	/*NodeList转化为数组*/
-	XX.nodeListToArray = function(list) {
-		var elems = [];
-		try {
-			elems = Array.prototype.slice.call(list, 0);
-		} catch (e) {/*For IE*/
-			for (var i = 0, len = list.length; i < len; ++i) {
-				elems.push(list[i]);
-			}
-		}
-		return elems;
-	};
+    XX.children = function (elem) {
+        return elem.children;
+    };
 
 	XX.getElementsByRange = function(x1, y1, x2, y2, context) {
 		var elems, i, len, ret = [];
@@ -346,5 +310,4 @@ void function() {
 		
 		return (x1 <= elx && x2 >= elx) && (y1 <= ely && y2 >= ely);
 	}
-
 }();

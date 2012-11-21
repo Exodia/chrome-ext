@@ -18,6 +18,10 @@ void function () {
             var ret = [], body = document.body;
             root = root || body;
             while (elem !== root && elem !== body) {
+                if((elem.nodeName == 'IFRAME' || elem.nodeName == 'FRAME') && elem.id ) {
+                    ret.unshift(elem.nodeName.torLowerCase() + '#' + elem.id);
+                    break;
+                }
                 ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
                 elem = elem.parentNode;
             }
@@ -64,7 +68,6 @@ void function () {
       		timer && clearTimeout(timer);
       		timer = setTimeout(dispatchFramePath, 100);
       	}
-      
       
         function dispatchFramePath() {
             var frames = document.querySelectorAll('iframe, frame'),
