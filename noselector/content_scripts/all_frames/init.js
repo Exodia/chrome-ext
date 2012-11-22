@@ -36,7 +36,7 @@ void function () {
                 root = root || body;
                 while (elem !== root && elem !== body) {
                     if(elem.id) {
-                        ret.push('#' + elem.id);
+                        ret.unshift(elem.nodeName.toLowerCase() + '#' + elem.id);
                         break;
                     }
                     ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
