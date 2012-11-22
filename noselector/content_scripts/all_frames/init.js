@@ -14,7 +14,7 @@ void function () {
          *参数elem:计算路径的元素
          * 参数root: 路径开始的节点,默认为body,最高也为body
          * */
-        XX.path = function (elem, root) {
+      /*  XX.path = function (elem, root) {
             var ret = [], body = document.body;
             root = root || body;
             while (elem !== root && elem !== body) {
@@ -28,8 +28,33 @@ void function () {
 
             console.log(ret.join('>'));
             return ret.join('>')
-        };
+        };*/
 
+        if(top != window) {
+            XX.path = function(elem, root) {
+                var ret = [], body = document.body;
+                root = root || body;
+                while (elem !== root && elem !== body) {
+                    if(elem.id) {
+                        ret.push('#' + elem.id);
+                        break;
+                    }
+                    ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
+                    elem = elem.parentNode;
+                }
+                return ret.join('>')
+            };
+        } else {
+            XX.path = function(elem, root) {
+                var ret = [], body = document.body;
+                root = root || body;
+                while (elem !== root && elem !== body) {
+                    ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
+                    elem = elem.parentNode;
+                }
+                return ret.join('>')
+            };
+        }
 
         /*获取元素在DOM树中相同标签节点的位置索引*/
         XX.indexTag = function (elem, deep) {
