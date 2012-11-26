@@ -14,22 +14,6 @@ void function () {
          *参数elem:计算路径的元素
          * 参数root: 路径开始的节点,默认为body,最高也为body
          * */
-      /*  XX.path = function (elem, root) {
-            var ret = [], body = document.body;
-            root = root || body;
-            while (elem !== root && elem !== body) {
-                if((elem.nodeName == 'IFRAME' || elem.nodeName == 'FRAME') && elem.id ) {
-                    ret.unshift(elem.nodeName.torLowerCase() + '#' + elem.id);
-                    break;
-                }
-                ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
-                elem = elem.parentNode;
-            }
-
-            console.log(ret.join('>'));
-            return ret.join('>')
-        };*/
-
         if(top != window) {
             XX.path = function(elem, root) {
                 var ret = [], body = document.body;
@@ -39,6 +23,11 @@ void function () {
                         ret.unshift(elem.nodeName.toLowerCase() + '#' + elem.id);
                         break;
                     }
+                    if(elem.nodeName === 'IFRAME' || elem.nodeName === 'FRAME') {
+                        ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem, body, true));
+                        break;
+                    }
+
                     ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
                     elem = elem.parentNode;
                 }
@@ -49,6 +38,10 @@ void function () {
                 var ret = [], body = document.body;
                 root = root || body;
                 while (elem !== root && elem !== body) {
+                    if(elem.nodeName === 'IFRAME' || elem.nodeName === 'FRAME') {
+                        ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem, body, true));
+                        break;
+                    }
                     ret.unshift(elem.nodeName.toLowerCase() + '$' + XX.indexTag(elem));
                     elem = elem.parentNode;
                 }
@@ -57,18 +50,20 @@ void function () {
         }
 
         /*获取元素在DOM树中相同标签节点的位置索引*/
-        XX.indexTag = function (elem, deep) {
+        XX.indexTag = function (elem, root, deep) {
             var name = elem.nodeName, i, children,
                 elems;
             if (name === 'BODY' || name === 'HTML') {
                 return 0;
             }
 
+            root = root || elem.parentNode;
             if (deep) {
-                elems = elem.parentNode.getElementsByTagName(name);
+                root = root || elem.parentNode;
+                elems = root.getElementsByTagName(name);
             } else {
                 elems = [];
-                children = XX.children(elem.parentNode);
+                children = XX.children(root);
                 for (i = 0, len = children.length; i < len; ++i) {
                     if (children[i].nodeName === name) {
                         elems.push(children[i]);
@@ -102,7 +97,7 @@ void function () {
                     {
                         type:'NoSelector',
                         cmd:'set_frame_path',
-                        path: iframePath + XX.path(frames[i])
+                        path: iframePath + XX.path(frames[i], true)
                     }, '*');
             }
         }
