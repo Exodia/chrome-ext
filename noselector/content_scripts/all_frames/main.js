@@ -6,6 +6,7 @@ void function($){
     var rangeModel = false;
 
     function sendMsg(data){
+        XX.$vefifyMask && XX.$vefifyMask.remove();
     	if(!window.top) {
     		data = XX.currentFramePath + '>' + data;
     	}

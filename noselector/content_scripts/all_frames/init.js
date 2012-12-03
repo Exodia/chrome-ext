@@ -176,19 +176,55 @@ void function () {
     	script.text = '(' + insertCode + ')()';
     	head.removeChild(head.insertBefore(script, head.firstChild));
 	}
-	
+
+    var MessageRouter = {
+        'verify': function(data) {
+                var $target = $(data.selector);
+                if($target.length == 0) {
+                    alert(msg.selector + '对应的元素不存在');
+                } else {
+                    var offset = $target.offset();
+                    if( XX.$vefifyMask) {
+                        XX.$vefifyMask.css({
+                            left : offset.left,
+                            top: offset.top,
+                            width : $target.outerWidth() + 'px',
+                            height : $target.outerHeight() + 'px'
+                        }).appendTo('body');
+                        return;
+                    }
+                    XX.$vefifyMask = $('<div>').addClass('No-Selector-Verify-Mask').css({
+                        position : 'absolute',
+                        zIndex : 99999,
+                        left : offset.left,
+                        top: offset.top,
+                        width : $target.outerWidth() + 'px',
+                        height : $target.outerHeight() + 'px',
+                        pointerEvents:'none',
+                        border:'5px solid greenYellow'
+                    }).appendTo('body');
+                }
+        },
+        'set_frame_path': function(data) {
+            XX.currentFramePath = data.path;
+        }
+    };
+
+
 	//content_script中设置iframe路径的信息
 	function onContentMessage(ev) {
 		var data = ev.data;
 		if(data.type !== TYPE) {
 			return;
 		}
-			
-		if(data.cmd == 'set_frame_path') {
-			XX.currentFramePath = data.path;
-		}
+
+        MessageRouter[data.cmd] && MessageRouter[data.cmd](data);
 	}
-	
+
+
+
+
+
 	window.XX = window.XX || {};
 	XX.init = function() {
 		if(XX._inited) {
