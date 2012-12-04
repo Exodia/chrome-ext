@@ -234,6 +234,8 @@ void function () {
 		window.addEventListener('message', onContentMessage, false);
 		insertScript();
     	XX._inited = true;
+        console.log(XX);
+        window.isTop && XX.AutoAjax.start();
 	};
 	
 	XX.start = function() {
@@ -243,5 +245,6 @@ void function () {
 	
 	XX.stop = function() {
 		window.postMessage({type:TYPE, cmd:'remove_dom_handler'}, "*");
+        window.isTop && XX.AutoAjax.stop();
 	};
 }();
