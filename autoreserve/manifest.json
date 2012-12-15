@@ -10,7 +10,7 @@
 	"content_scripts":[
         {
             "matches": ["https://reserve.apple.com/CN/zh_CN/reserve/iPhone"],
-            "js": ["jquery.js", "main.js"]
+            "js": ["jquery.js", "data.js", "main.js"]
         }
     ],
 	"web_accessible_resources": ["icon.png"]
