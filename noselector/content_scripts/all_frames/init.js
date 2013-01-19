@@ -135,7 +135,6 @@ void function () {
             		addedNodes = records[i].addedNodes || [];                		      		
             		for(var j = addedNodes.length - 1; j > -1; --j ) {
             			if(addedNodes[j].tagName == 'IFRAME') {
-            				//dispatchFramePath();
             				delayDispatch();
             				return;
             			}
@@ -144,7 +143,6 @@ void function () {
             		removedNodes = records[i].removedNodes || []; 
             		for(var j = removedNodes.length - 1; j > -1; --j ) {
             			if(removedNodes[j].tagName == 'IFRAME') {
-            			//	dispatchFramePath();
             				delayDispatch();
             				return;
             			}
@@ -163,7 +161,6 @@ void function () {
         	window.top.postMessage({type:'NoSelector', cmd:'send_frame_path'}, '*');
         } else {
         	delayDispatch();
-        	//dispatchFramePath();	
         }	
     }
 
@@ -224,7 +221,6 @@ void function () {
 
 
 
-
 	window.XX = window.XX || {};
 	XX.init = function() {
 		if(XX._inited) {
@@ -234,7 +230,6 @@ void function () {
 		window.addEventListener('message', onContentMessage, false);
 		insertScript();
     	XX._inited = true;
-        console.log(XX);
         window.isTop && XX.AutoAjax.start();
 	};
 	

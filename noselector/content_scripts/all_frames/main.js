@@ -31,8 +31,11 @@ void function($){
         }
     }
     
-    void function() { 	
+    void function() {
+
     	chrome.extension.sendMessage('loaded');
+
+
     }();
 
 

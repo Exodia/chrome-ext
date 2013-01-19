@@ -11,6 +11,17 @@ void function(){
         });
     }
 
+    chrome.windows.onCreated.addListener(function(id) {
+        Status = 'stop';
+        chrome.browserAction.setIcon({
+            path:"images/stop.png"
+        });
+        chrome.browserAction.setTitle({
+            title:'开始捕获'
+        });
+        sendCommand(Status);
+    });
+
     chrome.extension.onMessage.addListener(function(status){
         if(status !== 'loaded'){
             return;

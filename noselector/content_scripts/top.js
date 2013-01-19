@@ -11,7 +11,7 @@ void function($){
     var INTERVAL = 1000,
         URL = "http://127.0.0.1:8190";
         xhr = new XMLHttpRequest();
-        xhr,onload = function(xhr) {
+        xhr.onload = function(xhr) {
             if(xhr.responseText) {
                 window.postMessage( {
                     type:'NoSelector',

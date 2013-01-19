@@ -9,11 +9,11 @@
             "js":["./content_scripts/all_frames/init.js", "./content_scripts/all_frames/jquery.js",
                 "./content_scripts/all_frames/detect.js", "./content_scripts/all_frames/main.js"],
             "all_frames":true
-        },
-        {
-            "matches":["http://*/*", "https://*/*", "file://*/*"],
-            "js":["./content_scripts/top.js"]
-        }
+       },
+       {
+           "matches":["http://*/*", "https://*/*", "file://*/*"],
+           "js":["./content_scripts/top.js"]
+       }
     ],
     "background":{
         "scripts":["background.js"]
