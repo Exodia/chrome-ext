@@ -1,6 +1,7 @@
 
-
 var SubmitButton = 'submitButton';
+var RadioIds = ['addButtonMD528CH~AC', 'addButtonMD531CH~AC','addButtonMD540CH~AC',
+  'addButtonMD543CH~AC'];
 
 function fireChange(el) {
 	var event = document.createEvent("HTMLEvents");
@@ -8,23 +9,29 @@ function fireChange(el) {
 	el.dispatchEvent(event);
 }
 
+function random() {
+    return Math.floor(Math.random()*RadioIds.length);
+}
+
 $(function() {
-	chrome.extension.onMessage.addListener(function(msg) {	
-		var data = msg.data,
-			fields = data.fields, 
-		//	selects = item.selects, 
-			radios = data.radios;
-		for (var k in fields) {
-			$('#' + k).val(fields[k]);
-		}
-		
-		for(k in radios){
-			$(document.getElementById(k)).prop('disabled', false).trigger('click');
-		}
-		
-		// for(k in selects) {		
-			// fireChange(($('#' + k).prop('selectedIndex', selects[k]))[0]);
-		// }
-	//	$($("#quantity")[0].options[2]).trigger('click')
+	chrome.extension.onMessage.addListener(function(msg) {
+		var id = msg.id, item = Data[id],
+			fields = item.fields, selects = item.selects, radios = item.radios;
+
+        for(k in selects) {
+            fireChange(($('#' + k).prop('disabled', false).prop('selectedIndex', selects[k]))[0]);
+        }
+        //Radios
+        var radioId =  RadioIds[random()];
+	    $(document.getElementById(radioId)).prop('disabled', false).trigger('click');
+
+        setTimeout(function(){
+            $("#quantity").prop('selectedIndex', 1);
+            fireChange($("#quantity")[0]);
+            for (var k in fields) {
+                $('#' + k).val(fields[k]);
+            }
+        }, 1000);
+
 	})
 });

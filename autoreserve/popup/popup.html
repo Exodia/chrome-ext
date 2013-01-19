@@ -4,9 +4,12 @@
 	  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
 	  <title>popup</title>
 	  <script src="../jquery.js" type="text/javascript" charset="utf-8"></script>
-	  <script src="data.json"></script>
 	  <script src="popup.js" type="text/javascript" charset="utf-8"></script>
+      <script src="../data.js" type="text/javascript" charset="utf-8"></script>
 	  <style type="text/css" media="screen">
+          ol{
+              width: 100px;
+          }
 		  li:hover{
 		  	border:2px solid rgba(0, 0, 255, 120);
 		  }
@@ -14,9 +17,9 @@
 	</head>
 	<body>
 		<ol id="list">
-			<li data-index='0'>
-				<input type="radio" name="item" />
-			</li>
-		</ol>		
+		</ol>
+		<div>
+			<input type="checkbox" id="autosubmit" />
+		</div>
 	</body>
 </html>	
