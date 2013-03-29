@@ -9,15 +9,10 @@ void function($){
         XX.$vefifyMask && XX.$vefifyMask.remove();
     	if(!window.top) {
     		data = XX.currentFramePath + '>' + data;
+            window.postMessage({data:data, tpye:'NO_SELECTOR', cmd:'log_path'});
     	}
     	console.log(data);
-        $.post(URL, data, function(data){
-            if(data && data.status == 'success'){
-                console && console.log('success');
-            } else {
-                console && console.log('fail');
-            }
-        })
+
     }
     function keyHandler(ev) {
 
